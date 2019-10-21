@@ -15,8 +15,17 @@ Route::get('/', function() {
   return view('welcome');
 });
 
+Route::get('about', function() {
+  return view('about', [
+    'articles' => \App\Article::take(3)->latest()->get()
+  ]);
+});
+
 Route::get('contact', function() {
   return view('contact');
 });
 
 Route::get('posts/{post}', 'PostController@show');
+
+Route::get('articles', 'ArticleController@index');
+Route::get('articles/{article}', 'ArticleController@show');
